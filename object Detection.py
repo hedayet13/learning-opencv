@@ -61,5 +61,24 @@ for i in range (len(contours)):
 # cv.imshow('contours',internal_contours)
 # cv.imshow('external',external_contours)
 
+# feature matching
 
+reeses = cv.imread('pic/reeses.jpg')
+reeses = cv.resize(reeses,(400,500))
+reeses = cv.cvtColor(reeses,cv.COLOR_BGR2GRAY)
+cereals = cv.imread('pic/cereals.jpg')
+cereals = cv.resize(cereals,(500,400))
+cereals= cv.cvtColor(cereals,cv.COLOR_BGR2GRAY)
+# print(cereals.shape)
+orb = cv.ORB_create()
+kp1 , des1 = orb.detectAndCompute(reeses,None)
+kp2 , des2 = orb.detectAndComupte(cereals,None)
+bf =cv.BFMatcher(cv.NORM_HAMMING,crosscheck =3)
+matches = bf.match(des1,des2)
+matches =sorted(matches, key=lambda x:x.distance)
+reeses_matches = cv.drawMatches(reeses,kp1,cereals,kp2,matches[:25],outImg=None,flags=2)
+
+cv.imshow('sd',reeses_matches)
+
+# cv.imshow('reeses',cereals)
 cv.waitKey(0)
