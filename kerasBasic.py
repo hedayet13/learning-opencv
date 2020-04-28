@@ -1,7 +1,12 @@
+# try to use google colab
+# google colabotary is one of the finest tool for traing your data
+# remember to use keras from tensorflow
+
 import numpy as np
 from numpy import genfromtxt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+import tensorflow as tf
 
 data = genfromtxt('data/bank_note_data.txt',delimiter=',')
 # print(data)
@@ -19,8 +24,8 @@ scaled_X_test = scaler_object.transform(X_test)
 
 print(scaled_X_train.max())
 
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
 model = Sequential()
 
